@@ -1,17 +1,28 @@
-import { useQuery } from "react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 
-const getCharacters = async () => {
-  const res = await fetch(
-    "https://www.breakingbadapi.com/api/characters"
-  );
+const getUsers = async () => {
+  const res = await fetch("http://localhost:4000/posts");
   const data = res.json();
   return data;
 };
 
 const Home = () => {
   const navigate = useNavigate();
-  const { data, isLoading } = useQuery("characters", getCharacters);
+  const { data, isLoading } = useQuery("users", getUsers);
+
+  const deleteUser = async (id: string) => {
+    const res = await fetch(`http://localhost:4000/posts/${id}`, {
+      method: "DELETE",
+    });
+    console.log(res);
+  };
+
+  const { mutate: mutateDelete } = useMutation(deleteUser);
+
+  const handleDelete = (id: string) => {
+    mutateDelete(id);
+  };
 
   if (isLoading)
     return (
@@ -21,26 +32,27 @@ const Home = () => {
     );
 
   return (
-    <div className="p-8">
+    <div className="px-10">
       <p className="text-2xl mb-4">Home</p>
 
-      <Link
-        to={`/users/${10}`}
-        className="border py-2 px-12 rounded mb-4 inline-block"
-      >
-        Usuarios
-      </Link>
-
       <div className="grid grid-cols-3 gap-4">
-        {data.map((character: any) => (
+        {data.map((user: any) => (
           <div
-            className="border py-2 px-4 mb-4 cursor-pointer"
-            key={character.char_id}
-            onClick={() =>
-              navigate(`/character/${character.char_id}`)
-            }
+            className="flex items-center justify-between border py-2 px-4 mb-4"
+            key={user.id}
           >
-            <p>{character.name}</p>
+            <p
+              onClick={() => navigate(`/user/${user.id}`)}
+              className="cursor-pointer"
+            >
+              {user.name}
+            </p>
+            <button
+              className="border border-red-300 text-slate-500 text-sm py-1 px-2 rounded"
+              onClick={() => handleDelete(user.id)}
+            >
+              delete
+            </button>
           </div>
         ))}
       </div>

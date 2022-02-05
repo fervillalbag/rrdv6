@@ -2,9 +2,9 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div>
-      <ul>
-        <li>
+    <div className="p-10">
+      <ul className="flex">
+        <li className="mr-10">
           <NavLink
             className={({ isActive }) => (isActive ? "active" : "")}
             to="/"
@@ -12,7 +12,7 @@ const Navbar = () => {
             Home
           </NavLink>
         </li>
-        <li>
+        <li className="mr-10">
           <NavLink
             className={({ isActive }) => (isActive ? "active" : "")}
             to="/about"
@@ -20,15 +20,15 @@ const Navbar = () => {
             About
           </NavLink>
         </li>
-        <li>
+        <li className="mr-10">
           <NavLink
             className={({ isActive }) => (isActive ? "active" : "")}
-            to="/users"
+            to="/create"
           >
-            Users
+            Create
           </NavLink>
         </li>
-        <li>
+        <li className="mr-10">
           <NavLink
             className={({ isActive }) => (isActive ? "active" : "")}
             to="/dashboard"

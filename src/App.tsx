@@ -13,7 +13,8 @@ import Users from "./pages/UsersPage";
 import User from "./pages/UserPage";
 import Dashboard from "./pages/Dashboard";
 import { QueryClient, QueryClientProvider } from "react-query";
-import CharacterDetail from "./pages/CharacterDetail";
+import UserDetail from "./pages/UserDetail";
+import CreateUser from "./pages/CreateUser";
 
 function App() {
   const queryClient = new QueryClient();
@@ -32,10 +33,8 @@ function App() {
           />
           <Route path="/users" element={<Users />} />
           <Route path="/users/:id" element={<User />} />
-          <Route
-            path="/character/:id"
-            element={<CharacterDetail />}
-          />
+          <Route path="/create" element={<CreateUser />} />
+          <Route path="/user/:id" element={<UserDetail />} />
           <Route path="/dashboard/*" element={<Dashboard />}>
             <Route path="welcome" element={<p>Welcome</p>} />
             <Route path="goodbye" element={<p>Goodbye</p>} />

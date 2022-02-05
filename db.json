@@ -1,0 +1,19 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "name": "Fernando Villalba",
+      "age": 21
+    },
+    {
+      "id": 2,
+      "name": "Lucas Lamas",
+      "age": 22
+    },
+    {
+      "id": "773ab143-8530-4b03-86f9-5760a749e991",
+      "name": "fer",
+      "age": "22"
+    }
+  ]
+}

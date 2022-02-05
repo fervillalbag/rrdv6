@@ -1,13 +1,10 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
-const getCharacter = async (id: string) => {
-  const res = await fetch(
-    `https://www.breakingbadapi.com/api/characters/${id}`
-  );
+const getUser = async (id: string) => {
+  const res = await fetch(`http://localhost:4000/posts/${id}`);
   const data = await res.json();
-  return data[0];
+  return data;
 };
 
 const CharacterDetail = () => {
@@ -20,7 +17,7 @@ const CharacterDetail = () => {
     );
 
   const { data, isLoading } = useQuery("character", () =>
-    getCharacter(id)
+    getUser(id)
   );
 
   if (isLoading)
@@ -32,7 +29,7 @@ const CharacterDetail = () => {
 
   return (
     <div className="p-10">
-      <p className="text-4xl font-bold">Character Id</p>
+      <p className="text-3xl font-bold mb-4">User</p>
 
       <p>Name: {data.name}</p>
     </div>
