@@ -4,7 +4,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="px-10">
       <p>Dashboard</p>
 
       <Outlet />

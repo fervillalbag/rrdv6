@@ -44,14 +44,14 @@ const CreateUser = () => {
           type="text"
           className="block border py-2 px-4 rounded w-64 mb-4"
           value={data.name}
-          placeholder="Introduce tu nombre"
+          placeholder="Introduce un nombre"
           onChange={(e) => setData({ ...data, name: e.target.value })}
         />
         <input
           type="number"
           className="block border py-2 px-4 rounded w-64"
           value={data.age}
-          placeholder="Introduce tu edad"
+          placeholder="Introduce una edad"
           onChange={(e) => setData({ ...data, age: e.target.value })}
         />
 

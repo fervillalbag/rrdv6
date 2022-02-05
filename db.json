@@ -7,8 +7,13 @@
     },
     {
       "id": 2,
-      "name": "Lucas Lamas",
+      "name": "Lucas Lamas Perez",
       "age": 22
+    },
+    {
+      "id": "ea5ef50f-b2a6-4ff8-a077-8b32b994dc38",
+      "name": "Juan Pedro Gonz",
+      "age": "21"
     }
   ]
 }
