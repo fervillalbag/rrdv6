@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 const getUsers = async () => {
@@ -8,17 +8,25 @@ const getUsers = async () => {
 };
 
 const Home = () => {
+  const queryClient = useQueryClient();
+
   const navigate = useNavigate();
-  const { data, isLoading } = useQuery("users", getUsers);
+  const { data = [], isLoading } = useQuery("users", getUsers);
 
   const deleteUser = async (id: string) => {
-    const res = await fetch(`http://localhost:4000/posts/${id}`, {
+    await fetch(`http://localhost:4000/posts/${id}`, {
       method: "DELETE",
     });
-    console.log(res);
   };
 
-  const { mutate: mutateDelete } = useMutation(deleteUser);
+  const { mutate: mutateDelete } = useMutation(deleteUser, {
+    onSuccess: () => queryClient.invalidateQueries("users"),
+    onMutate: (id: string) => {
+      const oldUsers: any = queryClient.getQueryData("users");
+      const newPosts = oldUsers.filter((x: any) => x.id !== id);
+      queryClient.setQueryData("users", newPosts);
+    },
+  });
 
   const handleDelete = (id: string) => {
     mutateDelete(id);
