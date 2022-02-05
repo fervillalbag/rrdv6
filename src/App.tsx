@@ -12,28 +12,38 @@ import NotFound from "./pages/NotFound";
 import Users from "./pages/UsersPage";
 import User from "./pages/UserPage";
 import Dashboard from "./pages/Dashboard";
+import { QueryClient, QueryClientProvider } from "react-query";
+import CharacterDetail from "./pages/CharacterDetail";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Navbar />
+  const queryClient = new QueryClient();
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route
-          path="/team"
-          element={<Navigate replace to="/about" />}
-        />
-        <Route path="/users" element={<Users />} />
-        <Route path="/users/:id" element={<User />} />
-        <Route path="/dashboard/*" element={<Dashboard />}>
-          <Route path="welcome" element={<p>Welcome</p>} />
-          <Route path="goodbye" element={<p>Goodbye</p>} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Navbar />
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/team"
+            element={<Navigate replace to="/about" />}
+          />
+          <Route path="/users" element={<Users />} />
+          <Route path="/users/:id" element={<User />} />
+          <Route
+            path="/character/:id"
+            element={<CharacterDetail />}
+          />
+          <Route path="/dashboard/*" element={<Dashboard />}>
+            <Route path="welcome" element={<p>Welcome</p>} />
+            <Route path="goodbye" element={<p>Goodbye</p>} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
